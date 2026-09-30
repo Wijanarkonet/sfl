@@ -1,0 +1,1744 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SFL Season 2 - The Home of Private School Football</title>
+    <link rel="icon" type="image/jpeg" href="819882902_17972219118140687_15101562146224955_n.jpg">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@500;600;700;800;900&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        dark: {
+                            base: '#09090b',     // Hitam utama (zinc-950)
+                            surface: '#111114',  // Card background
+                            card: '#18181c',     // Card surface
+                            border: '#27272f',   // Clean sharp borders
+                            muted: '#202026'
+                        },
+                        accent: {
+                            red: '#dc2626',      // Merah ornamen standar
+                            redDark: '#991b1b',
+                            redLight: '#ef4444'
+                        }
+                    },
+                    fontFamily: {
+                        montserrat: ['Montserrat', 'sans-serif'],
+                        inter: ['Inter', 'sans-serif'],
+                        mono: ['Space Grotesk', 'monospace']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #09090b;
+            color: #ececee;
+        }
+
+        h1, h2, h3, h4, .font-heading {
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        /* Subtle scrollbar */
+        ::-webkit-scrollbar {
+            width: 7px;
+            height: 7px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #09090b;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #27272f;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #3f3f4e;
+        }
+
+        .table-row-hover:hover {
+            background-color: #16161a;
+        }
+    </style>
+</head>
+
+<body class="min-h-screen flex flex-col justify-between selection:bg-red-600 selection:text-white antialiased bg-[#09090b]">
+
+    <!-- Top Navigation Bar -->
+    <header class="sticky top-0 z-40 w-full bg-[#09090b]/95 backdrop-blur-md border-b border-[#202026]">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+            
+            <!-- Brand Logo & Name -->
+            <a href="#hero-poster" class="flex items-center space-x-3 group">
+                <div class="w-9 h-9 rounded-lg overflow-hidden border border-neutral-700 bg-neutral-900 flex-shrink-0 flex items-center justify-center p-0.5">
+                    <img src="819882902_17972219118140687_15101562146224955_n.jpg" alt="Logo SFL" class="w-full h-full object-cover rounded-md">
+                </div>
+                <div class="flex flex-col">
+                    <div class="flex items-center gap-2">
+                        <span class="font-extrabold text-white text-base tracking-wider font-heading">SFL</span>
+                        <span class="text-[10px] font-bold px-1.5 py-0.2 rounded bg-neutral-800 text-red-400 border border-neutral-700 uppercase tracking-widest">Season 2</span>
+                    </div>
+                    <span class="text-[10px] text-neutral-400 font-medium tracking-wide">The Home of Private School Football</span>
+                </div>
+            </a>
+
+            <!-- Navigation Links -->
+            <nav class="hidden md:flex items-center space-x-1 lg:space-x-2 text-xs font-semibold text-neutral-300">
+                <a href="#hero-poster" class="px-3 py-2 rounded-lg hover:text-white hover:bg-neutral-800/60 transition-colors">Poster Utama</a>
+                <a href="#informasi" class="px-3 py-2 rounded-lg hover:text-white hover:bg-neutral-800/60 transition-colors">Countdown</a>
+                <a href="#profil" class="px-3 py-2 rounded-lg hover:text-white hover:bg-neutral-800/60 transition-colors">Filosofi & Profil</a>
+                <a href="#tim" class="px-3 py-2 rounded-lg hover:text-white hover:bg-neutral-800/60 transition-colors">Registrasi & Tim</a>
+                <a href="#klasemen" class="px-3 py-2 rounded-lg hover:text-white hover:bg-neutral-800/60 transition-colors">Klasemen & Skor</a>
+                <a href="#dokumentasi" class="px-3 py-2 rounded-lg hover:text-white hover:bg-neutral-800/60 transition-colors">Dokumentasi</a>
+            </nav>
+
+            <!-- Actions -->
+            <div class="flex items-center space-x-3">
+                <button onclick="openAddTeamModal()" class="px-4 py-2 rounded-lg bg-red-600 hover:bg-red-700 text-white font-semibold text-xs transition-colors flex items-center gap-2 shadow-sm">
+                    <i class="fa-solid fa-plus text-[11px]"></i>
+                    <span>Daftar Tim</span>
+                </button>
+                <!-- Mobile hamburger -->
+                <button onclick="toggleMobileMenu()" class="md:hidden p-2 rounded-lg border border-neutral-800 text-neutral-300 hover:text-white hover:bg-neutral-900 focus:outline-none">
+                    <i class="fa-solid fa-bars text-sm"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Drawer -->
+        <div id="mobileMenu" class="hidden md:hidden bg-[#111114] border-b border-[#202026] px-4 py-3 space-y-1 text-xs font-medium">
+            <a href="#hero-poster" onclick="toggleMobileMenu()" class="block px-3 py-2 rounded-md hover:bg-neutral-800 text-neutral-200">Poster Utama</a>
+            <a href="#informasi" onclick="toggleMobileMenu()" class="block px-3 py-2 rounded-md hover:bg-neutral-800 text-neutral-200">Countdown Kickoff</a>
+            <a href="#profil" onclick="toggleMobileMenu()" class="block px-3 py-2 rounded-md hover:bg-neutral-800 text-neutral-200">Filosofi & Profil</a>
+            <a href="#tim" onclick="toggleMobileMenu()" class="block px-3 py-2 rounded-md hover:bg-neutral-800 text-neutral-200">Registrasi & Tim (CRUD)</a>
+            <a href="#klasemen" onclick="toggleMobileMenu()" class="block px-3 py-2 rounded-md hover:bg-neutral-800 text-neutral-200">Klasemen & Pertandingan</a>
+            <a href="#dokumentasi" onclick="toggleMobileMenu()" class="block px-3 py-2 rounded-md hover:bg-neutral-800 text-neutral-200">Dokumentasi Aksi</a>
+        </div>
+    </header>
+
+    <!-- ==================== BAGIAN PERTAMA: LANDSCAPE POSTER SHOWCASE ==================== -->
+    <section id="hero-poster" class="relative w-full bg-black border-b border-[#202026]">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 py-6 sm:py-8 space-y-4">
+            
+            <!-- Poster Wrapper 16:9 Display -->
+            <div class="relative w-full rounded-2xl overflow-hidden border border-[#27272f] shadow-2xl bg-neutral-950 aspect-[16/9] group">
+                <img src="SFL%20Baground.jpg.jpeg" alt="SFL Season 2 Official Landscape Poster" class="w-full h-full object-cover object-center">
+            </div>
+
+            <!-- Meta Quick Bar langsung di bawah poster landscape -->
+            <div class="bg-[#121215] border border-[#27272f] rounded-xl p-4 flex flex-col md:flex-row items-center justify-between gap-4">
+                
+                <!-- Info Kategori & Venue sesuai poster -->
+                <div class="flex flex-wrap items-center gap-3 sm:gap-6 text-xs text-neutral-300">
+                    <div class="flex items-center gap-2">
+                        <span class="w-2 h-2 rounded-full bg-red-600"></span>
+                        <span>Jadwal: <strong class="text-white">14 - 15 November 2026</strong></span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <i class="fa-solid fa-location-dot text-red-500"></i>
+                        <span>Venue: <strong class="text-white">Asrama BRIMOB Kedaung</strong></span>
+                    </div>
+                    <div class="flex items-center gap-1.5 font-mono text-[11px]">
+                        <span class="px-2 py-0.5 rounded bg-neutral-800 border border-neutral-700 font-bold text-white">U-8</span>
+                        <span class="px-2 py-0.5 rounded bg-neutral-800 border border-neutral-700 font-bold text-white">U-10</span>
+                        <span class="px-2 py-0.5 rounded bg-neutral-800 border border-neutral-700 font-bold text-white">U-12</span>
+                        <span class="text-neutral-400 text-xs ml-1">(10 Tim per Kategori)</span>
+                    </div>
+                </div>
+
+                <!-- Tombol Aksi Cepat & Indikator Scroll ke Bawah -->
+                <div class="flex items-center gap-3 w-full md:w-auto justify-end">
+                    <button onclick="openAddTeamModal()" class="px-4 py-2 rounded-lg bg-red-600 hover:bg-red-700 text-white font-semibold text-xs transition-colors flex items-center gap-1.5 shadow-sm">
+                        <i class="fa-solid fa-shield-halved text-xs"></i>
+                        <span>Daftar Tim Sekarang</span>
+                    </button>
+                    <a href="#informasi" class="px-3.5 py-2 rounded-lg bg-[#18181c] hover:bg-[#222228] text-neutral-300 hover:text-white font-medium text-xs border border-[#27272f] transition-colors flex items-center gap-2">
+                        <span>Scroll ke Bawah</span>
+                        <i class="fa-solid fa-chevron-down text-[10px] animate-bounce text-red-400"></i>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ==================== MAIN CONTENT: INFORMASI SAAT SCROLL KE BAWAH ==================== -->
+    <main class="w-full max-w-7xl mx-auto px-4 sm:px-6 py-12 space-y-20">
+
+        <!-- 1. SECTION: COUNTDOWN KICKOFF & DETAIL EVENT -->
+        <section id="informasi" class="scroll-mt-24 space-y-6">
+            <div class="border-b border-[#202026] pb-4 flex flex-col sm:flex-row sm:items-end justify-between gap-2">
+                <div>
+                    <span class="text-xs font-bold uppercase tracking-wider text-red-500 font-heading">Hitung Mundur Kickoff</span>
+                    <h2 class="text-2xl sm:text-3xl font-bold text-white uppercase tracking-tight font-heading mt-1">Student Football League Season 2</h2>
+                </div>
+                <p class="text-xs text-neutral-400 max-w-md">14 - 15 November 2026 di Lapangan Bola Asrama BRIMOB Kedaung.</p>
+            </div>
+
+            <!-- Clean Scoreboard Countdown Card -->
+            <div class="bg-[#121215] border border-[#27272f] rounded-2xl p-6 sm:p-8 space-y-6">
+                <div class="flex items-center justify-between pb-3 border-b border-[#222228]">
+                    <div class="flex items-center space-x-2">
+                        <i class="fa-regular fa-clock text-neutral-400 text-sm"></i>
+                        <span class="text-xs font-bold uppercase tracking-wider text-neutral-300 font-heading">Waktu Menuju Kickoff Pembukaan</span>
+                    </div>
+                    <span class="text-xs font-semibold text-neutral-400">
+                        Kickoff: <span class="text-white font-mono font-bold">14 November 2026 • 08:00 WIB</span>
+                    </span>
+                </div>
+
+                <!-- Time Blocks -->
+                <div class="grid grid-cols-4 gap-3 sm:gap-6 text-center">
+                    <div class="bg-[#18181c] border border-[#27272f] rounded-xl p-4 sm:p-5">
+                        <div id="days" class="text-3xl sm:text-5xl font-bold text-white font-mono">000</div>
+                        <div class="text-[10px] sm:text-xs font-medium text-neutral-400 uppercase mt-1">Hari</div>
+                    </div>
+                    <div class="bg-[#18181c] border border-[#27272f] rounded-xl p-4 sm:p-5">
+                        <div id="hours" class="text-3xl sm:text-5xl font-bold text-white font-mono">00</div>
+                        <div class="text-[10px] sm:text-xs font-medium text-neutral-400 uppercase mt-1">Jam</div>
+                    </div>
+                    <div class="bg-[#18181c] border border-[#27272f] rounded-xl p-4 sm:p-5">
+                        <div id="minutes" class="text-3xl sm:text-5xl font-bold text-white font-mono">00</div>
+                        <div class="text-[10px] sm:text-xs font-medium text-neutral-400 uppercase mt-1">Menit</div>
+                    </div>
+                    <div class="bg-[#18181c] border border-[#27272f] rounded-xl p-4 sm:p-5">
+                        <div id="seconds" class="text-3xl sm:text-5xl font-bold text-red-500 font-mono">00</div>
+                        <div class="text-[10px] sm:text-xs font-medium text-neutral-400 uppercase mt-1">Detik</div>
+                    </div>
+                </div>
+
+                <!-- 3 Kategori Kompetisi -->
+                <div class="pt-4 border-t border-[#222228] grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
+                    <div class="bg-[#18181c] p-3.5 rounded-xl border border-[#27272f]">
+                        <span class="text-red-400 font-mono font-bold text-sm block">Kategori U-8</span>
+                        <p class="text-neutral-400 mt-1">10 Tim Peserta • Pembinaan Usia Dini Grassroots</p>
+                    </div>
+                    <div class="bg-[#18181c] p-3.5 rounded-xl border border-[#27272f]">
+                        <span class="text-red-400 font-mono font-bold text-sm block">Kategori U-10</span>
+                        <p class="text-neutral-400 mt-1">10 Tim Peserta • Kompetisi Siswa Sekolah Dasar</p>
+                    </div>
+                    <div class="bg-[#18181c] p-3.5 rounded-xl border border-[#27272f]">
+                        <span class="text-red-400 font-mono font-bold text-sm block">Kategori U-12</span>
+                        <p class="text-neutral-400 mt-1">10 Tim Peserta • Private School & Academy League</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. SECTION: FILOSOFI LOGO, TUJUAN, VISI & MISI -->
+        <section id="profil" class="scroll-mt-24 space-y-6">
+            <div class="border-b border-[#202026] pb-4 flex flex-col sm:flex-row sm:items-end justify-between gap-2">
+                <div>
+                    <span class="text-xs font-bold uppercase tracking-wider text-red-500 font-heading">Identitas Turnamen</span>
+                    <h2 class="text-2xl sm:text-3xl font-bold text-white uppercase tracking-tight font-heading mt-1">Filosofi Logo, Tujuan & Visi Misi</h2>
+                </div>
+                <p class="text-xs text-neutral-400 max-w-md">Landasan moral, identitas brand, dan tujuan digelarnya kompetisi SFL.</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                
+                <!-- Filosofi Logo (5 Cols) -->
+                <div class="lg:col-span-5 bg-[#121215] border border-[#27272f] rounded-2xl p-6 flex flex-col justify-between space-y-6">
+                    <div>
+                        <!-- Logo Header -->
+                        <div class="flex items-center gap-4 mb-6 pb-4 border-b border-[#202026]">
+                            <div class="w-16 h-16 rounded-xl bg-neutral-900 border border-neutral-700 p-1 flex-shrink-0 flex items-center justify-center overflow-hidden">
+                                <img src="819882902_17972219118140687_15101562146224955_n.jpg" alt="Logo SFL" class="w-full h-full object-cover rounded-lg">
+                            </div>
+                            <div>
+                                <h3 class="text-lg font-bold text-white font-heading">Filosofi Logo SFL</h3>
+                                <p class="text-xs text-neutral-400">Simbol ketangkasan, mimpi, dan sportivitas</p>
+                            </div>
+                        </div>
+
+                        <!-- 3 Poin Filosofis -->
+                        <div class="space-y-4 text-xs">
+                            <div class="flex items-start gap-3">
+                                <span class="w-5 h-5 rounded bg-neutral-800 border border-neutral-700 text-red-400 flex items-center justify-center text-[10px] font-bold flex-shrink-0 mt-0.5">1</span>
+                                <div>
+                                    <h4 class="font-bold text-white text-xs mb-0.5">Siluet Pemain Muda Aktif</h4>
+                                    <p class="text-neutral-400 leading-relaxed">Merepresentasikan dinamika, kelincahan gerak, dan keberanian pelajar muda dalam mengejar mimpi sepak bola sejak usia dini.</p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start gap-3">
+                                <span class="w-5 h-5 rounded bg-neutral-800 border border-neutral-700 text-red-400 flex items-center justify-center text-[10px] font-bold flex-shrink-0 mt-0.5">2</span>
+                                <div>
+                                    <h4 class="font-bold text-white text-xs mb-0.5">Latar Merah Solid</h4>
+                                    <p class="text-neutral-400 leading-relaxed">Menjadi aksen keberanian, determinasi tinggi, dan semangat pantang menyerah (fighting spirit) dalam setiap pertandingan.</p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start gap-3">
+                                <span class="w-5 h-5 rounded bg-neutral-800 border border-neutral-700 text-red-400 flex items-center justify-center text-[10px] font-bold flex-shrink-0 mt-0.5">3</span>
+                                <div>
+                                    <h4 class="font-bold text-white text-xs mb-0.5">Sentuhan Putih & Sepak Bola</h4>
+                                    <p class="text-neutral-400 leading-relaxed">Melambangkan sportivitas murni, respek terhadap wasit dan tim lawan, serta nilai fair play.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tujuan, Visi & Misi (7 Cols) -->
+                <div class="lg:col-span-7 space-y-6">
+                    
+                    <!-- Tujuan Card -->
+                    <div class="bg-[#121215] border border-[#27272f] rounded-2xl p-6">
+                        <div class="flex items-center gap-2 mb-3">
+                            <div class="w-2 h-4 bg-red-600 rounded-sm"></div>
+                            <h3 class="text-base font-bold text-white font-heading">Tujuan Penyelenggaraan</h3>
+                        </div>
+                        <ul class="space-y-2 text-xs text-neutral-300">
+                            <li class="flex items-start gap-2">
+                                <i class="fa-solid fa-check text-red-500 text-[10px] mt-1"></i>
+                                <span>Menyediakan panggung kompetisi resmi bagi private schools dan akademi sepak bola usia U-8, U-10, dan U-12 di Jakarta.</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i class="fa-solid fa-check text-red-500 text-[10px] mt-1"></i>
+                                <span>Membantu pemantauan bakat (scouting) bagi akademi sepak bola nasional untuk menyaring pemain potensial sejak dini.</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i class="fa-solid fa-check text-red-500 text-[10px] mt-1"></i>
+                                <span>Menumbuhkan kedisiplinan, rasa percaya diri anak, respek, dan mental juara yang sportif.</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Visi & Misi Grid -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div class="bg-[#121215] border border-[#27272f] rounded-2xl p-5">
+                            <span class="text-[10px] font-bold uppercase tracking-wider text-neutral-400 block mb-1">Visi Utama</span>
+                            <h4 class="text-sm font-bold text-white font-heading mb-2">Liga Pelajar Terdepan</h4>
+                            <p class="text-xs text-neutral-400 leading-relaxed">
+                                Menjadi platform dan ekosistem turnamen sepak bola pelajar nomor satu di Indonesia yang terstandarisasi, transparan, dan terkelola secara digital.
+                            </p>
+                        </div>
+
+                        <div class="bg-[#121215] border border-[#27272f] rounded-2xl p-5">
+                            <span class="text-[10px] font-bold uppercase tracking-wider text-neutral-400 block mb-1">Misi Kompetisi</span>
+                            <h4 class="text-sm font-bold text-white font-heading mb-2">3 Langkah Pelaksanaan</h4>
+                            <ol class="list-decimal list-inside text-xs text-neutral-400 space-y-1 leading-relaxed">
+                                <li>Digitalisasi pendaftaran tim & verifikasi identitas pemain.</li>
+                                <li>Penyelenggaraan pertandingan tepat waktu, tertib, dan aman.</li>
+                                <li>Publikasi data statistik performa tim secara langsung.</li>
+                            </ol>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+        <!-- 3. SECTION: CRUD REGISTRASI TIM, ROSTER PEMAIN, PELATIH & OFFICIAL -->
+        <section id="tim" class="scroll-mt-24 space-y-6">
+            <div class="border-b border-[#202026] pb-4 flex flex-col md:flex-row md:items-end justify-between gap-4">
+                <div>
+                    <span class="text-xs font-bold uppercase tracking-wider text-red-500 font-heading">Data Peserta</span>
+                    <h2 class="text-2xl sm:text-3xl font-bold text-white uppercase tracking-tight font-heading mt-1">Pendaftaran & Manajemen Tim</h2>
+                    <p class="text-xs text-neutral-400 mt-1">Kelola data klub, susunan pemain (roster), staf pelatih kepala, dan ofisial tim.</p>
+                </div>
+                
+                <!-- Action Controls -->
+                <div class="flex flex-wrap items-center gap-3">
+                    <div class="relative">
+                        <i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-xs text-neutral-500"></i>
+                        <input type="text" id="searchTeamInput" onkeyup="filterTeamsList()" placeholder="Cari nama tim atau asal..." class="pl-8 pr-3 py-2 rounded-lg bg-[#121215] border border-[#27272f] text-neutral-200 placeholder-neutral-500 text-xs focus:outline-none focus:border-neutral-500 w-48 sm:w-56">
+                    </div>
+                    <button onclick="openAddTeamModal()" class="px-4 py-2 rounded-lg bg-red-600 hover:bg-red-700 text-white font-semibold text-xs transition-colors flex items-center gap-1.5 shadow-sm">
+                        <i class="fa-solid fa-plus text-[10px]"></i>
+                        <span>Tambah Tim Baru</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Clean Quick Stats -->
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs">
+                <div class="bg-[#121215] border border-[#27272f] rounded-xl p-3.5">
+                    <span class="text-neutral-400 block text-[11px]">Total Tim Terdaftar</span>
+                    <span id="statTotalTeams" class="text-2xl font-bold text-white font-mono mt-0.5 block">4</span>
+                </div>
+                <div class="bg-[#121215] border border-[#27272f] rounded-xl p-3.5">
+                    <span class="text-neutral-400 block text-[11px]">Total Pemain Terdata</span>
+                    <span id="statTotalPlayers" class="text-2xl font-bold text-neutral-200 font-mono mt-0.5 block">16</span>
+                </div>
+                <div class="bg-[#121215] border border-[#27272f] rounded-xl p-3.5">
+                    <span class="text-neutral-400 block text-[11px]">Pelatih & Ofisial</span>
+                    <span id="statTotalOfficials" class="text-2xl font-bold text-neutral-200 font-mono mt-0.5 block">8</span>
+                </div>
+                <div class="bg-[#121215] border border-[#27272f] rounded-xl p-3.5">
+                    <span class="text-neutral-400 block text-[11px]">Status Administrasi</span>
+                    <span class="text-xs font-semibold text-emerald-400 mt-2 block flex items-center gap-1">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> Tahap Verifikasi
+                    </span>
+                </div>
+            </div>
+
+            <!-- Team Cards Grid -->
+            <div id="teamsContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+                <!-- Injected via JavaScript -->
+            </div>
+        </section>
+
+        <!-- 4. SECTION: KLASEMEN & HASIL MATCH (STANDINGS TABLE) -->
+        <section id="klasemen" class="scroll-mt-24 space-y-6">
+            <div class="border-b border-[#202026] pb-4 flex flex-col md:flex-row md:items-end justify-between gap-4">
+                <div>
+                    <span class="text-xs font-bold uppercase tracking-wider text-red-500 font-heading">Leaderboard & Match Engine</span>
+                    <h2 class="text-2xl sm:text-3xl font-bold text-white uppercase tracking-tight font-heading mt-1">Klasemen & Pertandingan</h2>
+                    <p class="text-xs text-neutral-400 mt-1">Poin otomatis dihitung berdasarkan hasil pertandingan (Win: 3, Draw: 1, Lose: 0).</p>
+                </div>
+                <div>
+                    <button onclick="openMatchScoreModal()" class="px-3.5 py-2 rounded-lg bg-[#18181c] hover:bg-[#222228] text-neutral-200 hover:text-white font-semibold text-xs border border-[#27272f] transition-colors flex items-center gap-1.5">
+                        <i class="fa-solid fa-pen text-[10px] text-neutral-400"></i>
+                        <span>Input / Update Skor Pertandingan</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+                
+                <!-- Standings Table (8 Cols) -->
+                <div class="lg:col-span-8 bg-[#121215] border border-[#27272f] rounded-2xl p-5 overflow-hidden">
+                    <div class="flex items-center justify-between mb-4 pb-3 border-b border-[#202026]">
+                        <div class="flex items-center gap-2">
+                            <i class="fa-solid fa-table-list text-neutral-400 text-xs"></i>
+                            <h3 class="text-sm font-bold text-white font-heading uppercase">Tabel Klasemen Sementara</h3>
+                        </div>
+                        <span class="text-[11px] text-neutral-400">Fase Penyisihan Grup</span>
+                    </div>
+
+                    <!-- Clean Sports League Table -->
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left text-xs text-neutral-300">
+                            <thead class="bg-[#18181c] text-[11px] uppercase tracking-wider text-neutral-400 border-b border-[#27272f]">
+                                <tr>
+                                    <th class="py-2.5 px-3 text-center w-10">Pos</th>
+                                    <th class="py-2.5 px-3">Tim / Klub</th>
+                                    <th class="py-2.5 px-2 text-center" title="Main">P</th>
+                                    <th class="py-2.5 px-2 text-center" title="Menang">W</th>
+                                    <th class="py-2.5 px-2 text-center" title="Seri">D</th>
+                                    <th class="py-2.5 px-2 text-center" title="Kalah">L</th>
+                                    <th class="py-2.5 px-2 text-center hidden sm:table-cell" title="Gol Masuk">GF</th>
+                                    <th class="py-2.5 px-2 text-center hidden sm:table-cell" title="Gol Kebobolan">GA</th>
+                                    <th class="py-2.5 px-2 text-center" title="Selisih Gol">GD</th>
+                                    <th class="py-2.5 px-3 text-center font-bold text-white bg-neutral-900/60" title="Poin">PTS</th>
+                                </tr>
+                            </thead>
+                            <tbody id="standingsTableBody" class="divide-y divide-[#202026]">
+                                <!-- Dynamically populated by JS -->
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Legend -->
+                    <div class="mt-4 pt-3 border-t border-[#202026] flex flex-wrap items-center gap-4 text-[11px] text-neutral-400">
+                        <div class="flex items-center gap-1.5">
+                            <span class="w-2 h-2 rounded-full bg-emerald-500 inline-block"></span>
+                            <span>Peringkat 1 & 2 lolos ke Babak Semifinal</span>
+                        </div>
+                        <div class="flex items-center gap-1.5">
+                            <span class="w-2 h-2 rounded-full bg-neutral-600 inline-block"></span>
+                            <span>Tie-breaker: Poin &rarr; Selisih Gol &rarr; Produktivitas Gol</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Fixtures & Results List (4 Cols) -->
+                <div class="lg:col-span-4 bg-[#121215] border border-[#27272f] rounded-2xl p-5 space-y-4">
+                    <div class="flex items-center justify-between pb-3 border-b border-[#202026]">
+                        <div class="flex items-center gap-2">
+                            <i class="fa-solid fa-futbol text-neutral-400 text-xs"></i>
+                            <h3 class="text-sm font-bold text-white font-heading uppercase">Hasil & Jadwal Match</h3>
+                        </div>
+                    </div>
+
+                    <div id="matchesContainer" class="space-y-2.5">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- 5. SECTION: DOKUMENTASI PEMAIN SAAT BERTANDING -->
+        <section id="dokumentasi" class="scroll-mt-24 space-y-6">
+            <div class="border-b border-[#202026] pb-4 flex flex-col md:flex-row md:items-end justify-between gap-4">
+                <div>
+                    <span class="text-xs font-bold uppercase tracking-wider text-red-500 font-heading">Galeri Dokumentasi</span>
+                    <h2 class="text-2xl sm:text-3xl font-bold text-white uppercase tracking-tight font-heading mt-1">Dokumentasi Aksi Pemain</h2>
+                    <p class="text-xs text-neutral-400 mt-1">Dokumentasi foto aksi pemain di lapangan selama turnamen berlangsung.</p>
+                </div>
+
+                <div class="flex flex-wrap items-center gap-2">
+                    <button onclick="filterGallery('semua')" class="gallery-filter-btn px-3 py-1.5 rounded-lg bg-neutral-800 text-white text-xs font-semibold" data-tag="semua">Semua</button>
+                    <button onclick="filterGallery('aksi')" class="gallery-filter-btn px-3 py-1.5 rounded-lg bg-[#121215] text-neutral-400 hover:text-white border border-[#27272f] text-xs font-semibold" data-tag="aksi">Aksi Lapangan</button>
+                    <button onclick="filterGallery('selebrasi')" class="gallery-filter-btn px-3 py-1.5 rounded-lg bg-[#121215] text-neutral-400 hover:text-white border border-[#27272f] text-xs font-semibold" data-tag="selebrasi">Selebrasi</button>
+                    <button onclick="openUploadPhotoModal()" class="px-3 py-1.5 rounded-lg bg-red-600 hover:bg-red-700 text-white text-xs font-semibold flex items-center gap-1.5 ml-1">
+                        <i class="fa-solid fa-upload text-[10px]"></i>
+                        <span>Upload Foto</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Gallery Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4" id="galleryContainer">
+                <!-- Populated by JS -->
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Clean Solid Dark Footer -->
+    <footer class="mt-20 border-t border-[#202026] bg-[#0c0c0e]">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 py-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-neutral-400">
+            <div class="flex items-center space-x-2.5">
+                <img src="819882902_17972219118140687_15101562146224955_n.jpg" alt="Logo SFL" class="w-6 h-6 rounded object-cover">
+                <span class="font-bold text-white">Student Football League (SFL) Season 2</span>
+            </div>
+            <p>&copy; 2026 SFL Jakarta. Venue: Lapangan Bola Asrama BRIMOB Kedaung.</p>
+            <div class="flex items-center space-x-4">
+                <a href="#hero-poster" class="hover:text-white transition-colors">Poster</a>
+                <a href="#informasi" class="hover:text-white transition-colors">Countdown</a>
+                <a href="#tim" class="hover:text-white transition-colors">Tim</a>
+                <a href="#klasemen" class="hover:text-white transition-colors">Klasemen</a>
+                <a href="#dokumentasi" class="hover:text-white transition-colors">Galeri</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ==================== MODALS ==================== -->
+
+    <!-- MODAL 1: REGISTRASI & EDIT TIM -->
+    <div id="teamModal" class="fixed inset-0 z-50 hidden bg-black/75 flex items-center justify-center p-4 overflow-y-auto">
+        <div class="bg-[#121215] border border-[#27272f] max-w-lg w-full rounded-2xl p-6 shadow-2xl relative my-auto">
+            <button onclick="closeTeamModal()" class="absolute top-5 right-5 text-neutral-400 hover:text-white text-base">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            
+            <div class="flex items-center gap-3 mb-5 pb-3 border-b border-[#202026]">
+                <div class="w-9 h-9 rounded-lg bg-neutral-800 border border-neutral-700 text-neutral-200 flex items-center justify-center font-bold">
+                    <i class="fa-solid fa-shield-halved text-sm"></i>
+                </div>
+                <div>
+                    <h3 id="teamModalTitle" class="text-base font-bold text-white font-heading">Daftarkan Tim Baru</h3>
+                    <p class="text-xs text-neutral-400">Masukkan identitas klub/sekolah, kategori usia, dan kontak manajer.</p>
+                </div>
+            </div>
+
+            <form id="teamForm" onsubmit="handleTeamSubmit(event)" class="space-y-4 text-xs">
+                <input type="hidden" id="teamFormId">
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-neutral-300 font-medium mb-1">Nama Tim / Sekolah / SSB</label>
+                        <input type="text" id="teamName" required placeholder="Contoh: Bakti Mulya 400 FC" class="w-full px-3 py-2 rounded-lg bg-[#18181c] border border-[#27272f] text-white placeholder-neutral-500 focus:outline-none focus:border-neutral-400">
+                    </div>
+                    <div>
+                        <label class="block text-neutral-300 font-medium mb-1">Kategori Usia</label>
+                        <select id="teamCategory" class="w-full px-3 py-2 rounded-lg bg-[#18181c] border border-[#27272f] text-white focus:outline-none focus:border-neutral-400">
+                            <option value="U-8 (Under 8)">U-8 (Under 8)</option>
+                            <option value="U-10 (Under 10)">U-10 (Under 10)</option>
+                            <option value="U-12 (Under 12)">U-12 (Under 12)</option>
+                            <option value="U-15 Pelajar">U-15 Pelajar</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-neutral-300 font-medium mb-1">Asal Wilayah / Kota</label>
+                        <input type="text" id="teamOrigin" required placeholder="Contoh: Jakarta Selatan" class="w-full px-3 py-2 rounded-lg bg-[#18181c] border border-[#27272f] text-white placeholder-neutral-500 focus:outline-none focus:border-neutral-400">
+                    </div>
+                    <div>
+                        <label class="block text-neutral-300 font-medium mb-1">Status Verifikasi Berkas</label>
+                        <select id="teamStatus" class="w-full px-3 py-2 rounded-lg bg-[#18181c] border border-[#27272f] text-white focus:outline-none focus:border-neutral-400">
+                            <option value="Terverifikasi">Terverifikasi</option>
+                            <option value="Menunggu Berkas">Menunggu Berkas</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="pt-2 border-t border-[#202026]">
+                    <span class="text-[11px] font-bold text-neutral-400 uppercase tracking-wider block mb-2">Kontak Manajer / Penanggung Jawab</span>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <div>
+                            <label class="block text-neutral-300 font-medium mb-1">Nama Manajer</label>
+                            <input type="text" id="managerName" required placeholder="Nama Manajer Tim" class="w-full px-3 py-2 rounded-lg bg-[#18181c] border border-[#27272f] text-white placeholder-neutral-500 focus:outline-none focus:border-neutral-400">
+                        </div>
+                        <div>
+                            <label class="block text-neutral-300 font-medium mb-1">Nomor WhatsApp</label>
+                            <input type="text" id="managerPhone" required placeholder="08xxxxxxxxxx" class="w-full px-3 py-2 rounded-lg bg-[#18181c] border border-[#27272f] text-white placeholder-neutral-500 focus:outline-none focus:border-neutral-400">
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-neutral-300 font-medium mb-1">Logo Tim (Opsional, format file gambar)</label>
+                    <input type="file" id="teamLogoInput" accept="image/*" class="w-full px-2.5 py-1.5 rounded-lg bg-[#18181c] border border-[#27272f] text-neutral-400 text-xs file:mr-2 file:py-1 file:px-2.5 file:rounded file:border-0 file:text-xs file:bg-neutral-800 file:text-white hover:file:bg-neutral-700">
+                </div>
+
+                <div class="pt-3 border-t border-[#202026] flex items-center justify-end gap-2">
+                    <button type="button" onclick="closeTeamModal()" class="px-3.5 py-2 rounded-lg bg-[#18181c] hover:bg-[#222228] text-neutral-300">Batal</button>
+                    <button type="submit" class="px-4 py-2 rounded-lg bg-red-600 hover:bg-red-700 text-white font-semibold shadow-sm">Simpan Tim</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL 2: DETAIL ROSTER & KELOLA PEMAIN / OFFICIAL -->
+    <div id="rosterModal" class="fixed inset-0 z-50 hidden bg-black/80 flex items-center justify-center p-3 sm:p-4 overflow-y-auto">
+        <div class="bg-[#121215] border border-[#27272f] max-w-3xl w-full rounded-2xl p-5 sm:p-6 shadow-2xl relative my-auto max-h-[90vh] flex flex-col">
+            <button onclick="closeRosterModal()" class="absolute top-5 right-5 text-neutral-400 hover:text-white text-base">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <!-- Roster Header -->
+            <div class="flex items-center gap-3 pb-4 border-b border-[#202026] flex-shrink-0">
+                <div class="w-12 h-12 rounded-lg bg-neutral-900 border border-neutral-700 p-1 flex-shrink-0 flex items-center justify-center overflow-hidden">
+                    <img id="rosterTeamLogo" src="819882902_17972219118140687_15101562146224955_n.jpg" alt="Logo Tim" class="w-full h-full object-cover rounded">
+                </div>
+                <div>
+                    <div class="flex items-center gap-2">
+                        <h3 id="rosterTeamName" class="text-lg font-bold text-white font-heading">Nama Tim</h3>
+                        <span id="rosterTeamBadge" class="text-[10px] font-bold px-2 py-0.5 rounded bg-neutral-800 text-emerald-400 border border-neutral-700">Terverifikasi</span>
+                    </div>
+                    <p id="rosterTeamInfo" class="text-xs text-neutral-400">Kategori • Asal Kota</p>
+                </div>
+            </div>
+
+            <!-- Modal Content Scrollable -->
+            <div class="overflow-y-auto py-4 space-y-6 flex-grow pr-1">
+
+                <!-- Ofisial & Pelatih -->
+                <div>
+                    <div class="flex items-center justify-between mb-3">
+                        <h4 class="text-xs font-bold uppercase tracking-wider text-neutral-300 font-heading">Pelatih & Ofisial Tim</h4>
+                        <button onclick="toggleAddOfficialForm()" class="text-xs text-neutral-300 hover:text-white font-semibold flex items-center gap-1">
+                            <i class="fa-solid fa-plus text-[10px]"></i> Tambah Ofisial
+                        </button>
+                    </div>
+
+                    <!-- Inline Add Official Form -->
+                    <div id="addOfficialFormBox" class="hidden bg-[#18181c] border border-[#27272f] p-3 rounded-xl mb-3 space-y-2 text-xs">
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
+                            <input type="text" id="newOfficialName" placeholder="Nama Pelatih / Ofisial" class="px-2.5 py-1.5 rounded-lg bg-[#111114] border border-[#27272f] text-white">
+                            <select id="newOfficialRole" class="px-2.5 py-1.5 rounded-lg bg-[#111114] border border-[#27272f] text-white">
+                                <option value="Head Coach (Pelatih Kepala)">Pelatih Kepala (Head Coach)</option>
+                                <option value="Asisten Pelatih">Asisten Pelatih</option>
+                                <option value="Fisioterapis / Medis">Fisioterapis / Medis</option>
+                                <option value="Ofisial / Kitman">Ofisial / Kitman</option>
+                            </select>
+                            <input type="text" id="newOfficialLicense" placeholder="Lisensi (cth: Lisensi C)" class="px-2.5 py-1.5 rounded-lg bg-[#111114] border border-[#27272f] text-white">
+                        </div>
+                        <div class="flex justify-end gap-2 pt-1">
+                            <button onclick="toggleAddOfficialForm()" class="px-2.5 py-1 text-xs text-neutral-400">Batal</button>
+                            <button onclick="saveOfficialToCurrentTeam()" class="px-3 py-1 text-xs bg-red-600 hover:bg-red-700 text-white font-semibold rounded-md">Simpan Ofisial</button>
+                        </div>
+                    </div>
+
+                    <div id="rosterOfficialsList" class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+
+                <!-- Pemain (Roster) -->
+                <div>
+                    <div class="flex items-center justify-between mb-3">
+                        <h4 class="text-xs font-bold uppercase tracking-wider text-neutral-300 font-heading">Daftar Pemain (Roster)</h4>
+                        <button onclick="toggleAddPlayerForm()" class="text-xs px-2.5 py-1 rounded-md bg-neutral-800 hover:bg-neutral-700 text-white font-semibold flex items-center gap-1">
+                            <i class="fa-solid fa-user-plus text-[10px]"></i> Tambah Pemain
+                        </button>
+                    </div>
+
+                    <!-- Inline Add Player Form -->
+                    <div id="addPlayerFormBox" class="hidden bg-[#18181c] border border-[#27272f] p-4 rounded-xl mb-4 space-y-3 text-xs">
+                        <span class="font-bold text-white block">Formulir Tambah Pemain Baru</span>
+                        <div class="grid grid-cols-1 sm:grid-cols-4 gap-2.5">
+                            <div class="sm:col-span-2">
+                                <label class="block text-neutral-400 mb-1">Nama Lengkap</label>
+                                <input type="text" id="newPlayerName" placeholder="Nama Pemain" class="w-full px-2.5 py-1.5 rounded-lg bg-[#111114] border border-[#27272f] text-white">
+                            </div>
+                            <div>
+                                <label class="block text-neutral-400 mb-1">Nomor Punggung</label>
+                                <input type="number" id="newPlayerNumber" min="1" max="99" placeholder="10" class="w-full px-2.5 py-1.5 rounded-lg bg-[#111114] border border-[#27272f] text-white">
+                            </div>
+                            <div>
+                                <label class="block text-neutral-400 mb-1">Posisi</label>
+                                <select id="newPlayerPosition" class="w-full px-2.5 py-1.5 rounded-lg bg-[#111114] border border-[#27272f] text-white">
+                                    <option value="Forward (Penyerang)">Penyerang (FW)</option>
+                                    <option value="Midfielder (Gelandang)">Gelandang (MF)</option>
+                                    <option value="Defender (Bek)">Bek (DF)</option>
+                                    <option value="Goalkeeper (Kiper)">Kiper (GK)</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+                            <div>
+                                <label class="block text-neutral-400 mb-1">Usia (Tahun)</label>
+                                <input type="number" id="newPlayerAge" min="6" max="18" placeholder="10" class="w-full px-2.5 py-1.5 rounded-lg bg-[#111114] border border-[#27272f] text-white">
+                            </div>
+                            <div class="sm:col-span-2">
+                                <label class="block text-neutral-400 mb-1">No. Identitas (NISN / Kartu Pelajar)</label>
+                                <input type="text" id="newPlayerIdCard" placeholder="Contoh: NISN 0089123456" class="w-full px-2.5 py-1.5 rounded-lg bg-[#111114] border border-[#27272f] text-white">
+                            </div>
+                        </div>
+
+                        <div class="flex justify-end gap-2 pt-2 border-t border-[#27272f]">
+                            <button onclick="toggleAddPlayerForm()" class="px-3 py-1 text-xs text-neutral-400">Batal</button>
+                            <button onclick="savePlayerToCurrentTeam()" class="px-3.5 py-1.5 text-xs bg-red-600 hover:bg-red-700 text-white font-semibold rounded-md">Simpan Pemain</button>
+                        </div>
+                    </div>
+
+                    <div id="rosterPlayersList" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2.5 text-xs">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Footer Close -->
+            <div class="pt-3 border-t border-[#202026] flex justify-end">
+                <button onclick="closeRosterModal()" class="px-4 py-2 rounded-lg bg-[#18181c] hover:bg-[#222228] text-neutral-200 text-xs font-semibold">Tutup</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL 3: INPUT / UPDATE SKOR PERTANDINGAN -->
+    <div id="matchModal" class="fixed inset-0 z-50 hidden bg-black/75 flex items-center justify-center p-4">
+        <div class="bg-[#121215] border border-[#27272f] max-w-md w-full rounded-2xl p-6 shadow-2xl relative">
+            <button onclick="closeMatchScoreModal()" class="absolute top-5 right-5 text-neutral-400 hover:text-white text-base">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            
+            <div class="flex items-center gap-2.5 mb-4 pb-3 border-b border-[#202026]">
+                <div class="w-8 h-8 rounded-lg bg-neutral-800 border border-neutral-700 text-neutral-300 flex items-center justify-center">
+                    <i class="fa-solid fa-futbol text-xs"></i>
+                </div>
+                <div>
+                    <h3 class="text-base font-bold text-white font-heading">Input Hasil Pertandingan</h3>
+                    <p class="text-xs text-neutral-400">Skor baru akan langsung mengupdate posisi klasemen.</p>
+                </div>
+            </div>
+
+            <form id="matchScoreForm" onsubmit="handleMatchSubmit(event)" class="space-y-4 text-xs">
+                <div>
+                    <label class="block text-neutral-300 font-medium mb-1">Pilih Pertandingan</label>
+                    <select id="matchSelect" class="w-full px-3 py-2 rounded-lg bg-[#18181c] border border-[#27272f] text-white focus:outline-none focus:border-neutral-400">
+                        <!-- Populated by JS -->
+                    </select>
+                </div>
+
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label id="team1Label" class="block text-neutral-300 font-medium mb-1 truncate">Skor Tim 1</label>
+                        <input type="number" id="team1Score" min="0" max="25" required class="w-full px-3 py-2 rounded-lg bg-[#18181c] border border-[#27272f] text-white text-center font-bold text-base focus:outline-none focus:border-neutral-400">
+                    </div>
+                    <div>
+                        <label id="team2Label" class="block text-neutral-300 font-medium mb-1 truncate">Skor Tim 2</label>
+                        <input type="number" id="team2Score" min="0" max="25" required class="w-full px-3 py-2 rounded-lg bg-[#18181c] border border-[#27272f] text-white text-center font-bold text-base focus:outline-none focus:border-neutral-400">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-neutral-300 font-medium mb-1">Status Pertandingan</label>
+                    <select id="matchStatusSelect" class="w-full px-3 py-2 rounded-lg bg-[#18181c] border border-[#27272f] text-white focus:outline-none focus:border-neutral-400">
+                        <option value="Selesai (FT)">Selesai (Full Time)</option>
+                        <option value="Live Sekarang">Live Sekarang</option>
+                    </select>
+                </div>
+
+                <div class="pt-3 border-t border-[#202026] flex items-center justify-end gap-2">
+                    <button type="button" onclick="closeMatchScoreModal()" class="px-3.5 py-2 rounded-lg bg-[#18181c] text-neutral-300">Batal</button>
+                    <button type="submit" class="px-4 py-2 rounded-lg bg-red-600 hover:bg-red-700 text-white font-semibold">Simpan Skor</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL 4: UPLOAD DOKUMENTASI FOTO -->
+    <div id="uploadPhotoModal" class="fixed inset-0 z-50 hidden bg-black/75 flex items-center justify-center p-4">
+        <div class="bg-[#121215] border border-[#27272f] max-w-sm w-full rounded-2xl p-6 shadow-2xl relative">
+            <button onclick="closeUploadPhotoModal()" class="absolute top-5 right-5 text-neutral-400 hover:text-white text-base">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            
+            <h3 class="text-base font-bold text-white font-heading mb-1">Upload Foto Aksi</h3>
+            <p class="text-xs text-neutral-400 mb-4 pb-3 border-b border-[#202026]">Tambahkan momen foto pemain saat berlaga.</p>
+
+            <form id="uploadPhotoForm" onsubmit="handlePhotoUpload(event)" class="space-y-3 text-xs">
+                <div>
+                    <label class="block text-neutral-300 font-medium mb-1">Keterangan / Judul Foto</label>
+                    <input type="text" id="photoTitle" required placeholder="Contoh: Penyelamatan kiper menit 80" class="w-full px-3 py-2 rounded-lg bg-[#18181c] border border-[#27272f] text-white">
+                </div>
+                <div>
+                    <label class="block text-neutral-300 font-medium mb-1">Kategori</label>
+                    <select id="photoCategory" class="w-full px-3 py-2 rounded-lg bg-[#18181c] border border-[#27272f] text-white">
+                        <option value="aksi">Aksi Lapangan</option>
+                        <option value="selebrasi">Selebrasi Gol</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-neutral-300 font-medium mb-1">Pilih File Foto</label>
+                    <input type="file" id="photoFileInput" accept="image/*" required class="w-full px-2 py-1.5 rounded-lg bg-[#18181c] border border-[#27272f] text-neutral-400 file:mr-2 file:py-1 file:px-2 file:rounded file:border-0 file:text-xs file:bg-neutral-800 file:text-white">
+                </div>
+
+                <div class="pt-3 border-t border-[#202026] flex items-center justify-end gap-2">
+                    <button type="button" onclick="closeUploadPhotoModal()" class="px-3 py-1.5 rounded-lg bg-[#18181c] text-neutral-300">Batal</button>
+                    <button type="submit" class="px-4 py-1.5 rounded-lg bg-red-600 hover:bg-red-700 text-white font-semibold">Simpan ke Galeri</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL 5: LIGHTBOX PREVIEW -->
+    <div id="lightboxModal" class="fixed inset-0 z-50 hidden bg-black/90 flex items-center justify-center p-4" onclick="closeLightbox()">
+        <button onclick="closeLightbox()" class="absolute top-5 right-5 text-neutral-300 hover:text-white text-2xl z-10">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+        <div class="max-w-4xl w-full text-center space-y-3" onclick="event.stopPropagation()">
+            <img id="lightboxImage" src="" alt="Preview Dokumentasi" class="max-h-[80vh] mx-auto rounded-xl border border-neutral-800 object-contain shadow-2xl">
+            <h4 id="lightboxTitle" class="text-sm font-bold text-white"></h4>
+            <p id="lightboxDesc" class="text-xs text-neutral-400"></p>
+        </div>
+    </div>
+
+    <!-- ==================== JAVASCRIPT APP LOGIC ==================== -->
+    <script>
+        // --- REALISTIC INITIAL DATA STORE ---
+        const DEFAULT_TEAMS = [
+            {
+                id: "team-1",
+                name: "Bakti Mulya 400",
+                category: "U-12 (Under 12)",
+                origin: "Jakarta Selatan",
+                logo: "819882902_17972219118140687_15101562146224955_n.jpg",
+                status: "Terverifikasi",
+                manager: {
+                    name: "Coach Hendra",
+                    phone: "081288991122",
+                    email: "baktimulya400@gmail.com"
+                },
+                officials: [
+                    { name: "Coach Hendra", role: "Head Coach (Pelatih Kepala)", license: "Lisensi B AFC" },
+                    { name: "dr. Ryan Ardiansyah", role: "Fisioterapis / Medis", license: "Medis Tim" }
+                ],
+                players: [
+                    { id: 101, name: "Azka Alfarizi", number: 1, position: "Goalkeeper (Kiper)", age: 11, idCard: "NISN: 009871234" },
+                    { id: 102, name: "Dimas Raditya", number: 10, position: "Midfielder (Gelandang)", age: 12, idCard: "NISN: 009871235" },
+                    { id: 103, name: "Rizky Firmansyah", number: 9, position: "Forward (Penyerang)", age: 11, idCard: "NISN: 009871236" },
+                    { id: 104, name: "Bagas Pratama", number: 4, position: "Defender (Bek)", age: 12, idCard: "NISN: 009871237" }
+                ]
+            },
+            {
+                id: "team-2",
+                name: "BRIMOB FC Youth",
+                category: "U-12 (Under 12)",
+                origin: "Kedaung, Jakarta Barat",
+                logo: "819882902_17972219118140687_15101562146224955_n.jpg",
+                status: "Terverifikasi",
+                manager: {
+                    name: "Kompol Hendra Kusuma",
+                    phone: "081288991122",
+                    email: "brimobfc@gmail.com"
+                },
+                officials: [
+                    { name: "Coach Bambang P.", role: "Head Coach (Pelatih Kepala)", license: "Lisensi B AFC" },
+                    { name: "dr. Ryan Ardiansyah", role: "Fisioterapis / Medis", license: "Medis Tim" }
+                ],
+                players: [
+                    { id: 201, name: "Hugo Alfarizi", number: 18, position: "Forward (Penyerang)", age: 11, idCard: "NISN: 009872111" },
+                    { id: 202, name: "Fathir Maulana", number: 8, position: "Midfielder (Gelandang)", age: 12, idCard: "NISN: 009872112" },
+                    { id: 203, name: "Zaidan Yusuf", number: 22, position: "Goalkeeper (Kiper)", age: 11, idCard: "NISN: 009872113" },
+                    { id: 204, name: "Rian Hidayat", number: 5, position: "Defender (Bek)", age: 12, idCard: "NISN: 009872114" }
+                ]
+            },
+            {
+                id: "team-3",
+                name: "Kedaung United",
+                category: "U-10 (Under 10)",
+                origin: "Kedaung, Tangerang",
+                logo: "819882902_17972219118140687_15101562146224955_n.jpg",
+                status: "Terverifikasi",
+                manager: {
+                    name: "Ridwan Kamil",
+                    phone: "087811223344",
+                    email: "kedaung.utd@gmail.com"
+                },
+                officials: [
+                    { name: "Coach Dedi Kusnandar", role: "Head Coach (Pelatih Kepala)", license: "Lisensi C PSSI" },
+                    { name: "Yudi Purnomo", role: "Asisten Pelatih", license: "Lisensi D" }
+                ],
+                players: [
+                    { id: 301, name: "Raffi Ahmad", number: 7, position: "Forward (Penyerang)", age: 9, idCard: "NISN: 009873001" },
+                    { id: 302, name: "Kevin Sanjaya", number: 6, position: "Midfielder (Gelandang)", age: 10, idCard: "NISN: 009873002" },
+                    { id: 303, name: "Arya Wiguna", number: 12, position: "Goalkeeper (Kiper)", age: 9, idCard: "NISN: 009873003" },
+                    { id: 304, name: "Fajar Nugraha", number: 3, position: "Defender (Bek)", age: 10, idCard: "NISN: 009873004" }
+                ]
+            },
+            {
+                id: "team-4",
+                name: "Garuda Muda Academy",
+                category: "U-8 (Under 8)",
+                origin: "Jakarta Pusat",
+                logo: "819882902_17972219118140687_15101562146224955_n.jpg",
+                status: "Menunggu Berkas",
+                manager: {
+                    name: "Irwan Setiawan",
+                    phone: "085611224455",
+                    email: "garudamuda@gmail.com"
+                },
+                officials: [
+                    { name: "Coach Eko P.", role: "Head Coach (Pelatih Kepala)", license: "Lisensi B AFC" },
+                    { name: "Wahyu Tri", role: "Ofisial / Kitman", license: "Ofisial" }
+                ],
+                players: [
+                    { id: 401, name: "Iqbal Ramadhan", number: 11, position: "Forward (Penyerang)", age: 8, idCard: "NISN: 009874111" },
+                    { id: 402, name: "Gilang Permana", number: 14, position: "Midfielder (Gelandang)", age: 7, idCard: "NISN: 009874112" },
+                    { id: 403, name: "Fikri Haikal", number: 20, position: "Goalkeeper (Kiper)", age: 8, idCard: "NISN: 009874113" },
+                    { id: 404, name: "Sandy Pratama", number: 2, position: "Defender (Bek)", age: 7, idCard: "NISN: 009874114" }
+                ]
+            }
+        ];
+
+        const DEFAULT_MATCHES = [
+            {
+                id: "match-1",
+                team1Id: "team-1",
+                team2Id: "team-2",
+                team1Score: 2,
+                team2Score: 1,
+                status: "Selesai (FT)",
+                dateText: "14 Nov 2026 • 09:00 WIB",
+                location: "Lapangan BRIMOB Kedaung A"
+            },
+            {
+                id: "match-2",
+                team1Id: "team-3",
+                team2Id: "team-4",
+                team1Score: 3,
+                team2Score: 2,
+                status: "Selesai (FT)",
+                dateText: "14 Nov 2026 • 10:15 WIB",
+                location: "Lapangan BRIMOB Kedaung B"
+            },
+            {
+                id: "match-3",
+                team1Id: "team-2",
+                team2Id: "team-3",
+                team1Score: 0,
+                team2Score: 0,
+                status: "Jadwal Mendatang",
+                dateText: "15 Nov 2026 • 09:00 WIB",
+                location: "Lapangan BRIMOB Kedaung A"
+            }
+        ];
+
+        const DEFAULT_GALLERY = [
+            {
+                id: 1,
+                title: "Official Poster Landscape SFL Season 2",
+                category: "aksi",
+                image: "SFL%20Baground.jpg.jpeg",
+                desc: "The Home of Private School Football - 14-15 November 2026 di Asrama BRIMOB Kedaung."
+            },
+            {
+                id: 2,
+                title: "Selebrasi Gol Hugo #18",
+                category: "selebrasi",
+                image: "dokback.jpeg",
+                desc: "Pemain merayakan gol kemenangan di lapangan sintetis SFL."
+            },
+            {
+                id: 3,
+                title: "Poster Resmi SFL Season 2 Jakarta",
+                category: "aksi",
+                image: "poster.jpg",
+                desc: "Kickoff turnamen akbar sepak bola pelajar di Jakarta."
+            },
+            {
+                id: 4,
+                title: "Aksi Penyelamatan Krusial Kiper",
+                category: "aksi",
+                image: "dokback.jpeg",
+                desc: "Kiper sigap mengamankan gawang di menit-menit krusial babak kedua."
+            }
+        ];
+
+        // State variables
+        let teams = JSON.parse(localStorage.getItem('sfl_teams_landscape')) || DEFAULT_TEAMS;
+        let matches = JSON.parse(localStorage.getItem('sfl_matches_landscape')) || DEFAULT_MATCHES;
+        let gallery = JSON.parse(localStorage.getItem('sfl_gallery_landscape')) || DEFAULT_GALLERY;
+        let activeRosterTeamId = null;
+
+        function saveTeamsToStorage() {
+            localStorage.setItem('sfl_teams_landscape', JSON.stringify(teams));
+            updateOverallStats();
+        }
+
+        function saveMatchesToStorage() {
+            localStorage.setItem('sfl_matches_landscape', JSON.stringify(matches));
+        }
+
+        function saveGalleryToStorage() {
+            localStorage.setItem('sfl_gallery_landscape', JSON.stringify(gallery));
+        }
+
+        // --- COUNTDOWN TIMER (14 November 2026) ---
+        const targetDate = new Date('November 14, 2026 08:00:00').getTime();
+
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const distance = targetDate - now;
+
+            const daysEl = document.getElementById('days');
+            const hoursEl = document.getElementById('hours');
+            const minutesEl = document.getElementById('minutes');
+            const secondsEl = document.getElementById('seconds');
+
+            if (distance < 0) {
+                if (daysEl) daysEl.innerText = "000";
+                if (hoursEl) hoursEl.innerText = "00";
+                if (minutesEl) minutesEl.innerText = "00";
+                if (secondsEl) secondsEl.innerText = "00";
+                return;
+            }
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            if (daysEl) daysEl.innerText = String(days).padStart(3, '0');
+            if (hoursEl) hoursEl.innerText = String(hours).padStart(2, '0');
+            if (minutesEl) minutesEl.innerText = String(minutes).padStart(2, '0');
+            if (secondsEl) secondsEl.innerText = String(seconds).padStart(2, '0');
+        }
+
+        // --- STATS BAR ---
+        function updateOverallStats() {
+            const totalTeams = teams.length;
+            let totalPlayers = 0;
+            let totalOfficials = 0;
+
+            teams.forEach(t => {
+                totalPlayers += (t.players ? t.players.length : 0);
+                totalOfficials += (t.officials ? t.officials.length : 0);
+            });
+
+            document.getElementById('statTotalTeams').innerText = totalTeams;
+            document.getElementById('statTotalPlayers').innerText = totalPlayers;
+            document.getElementById('statTotalOfficials').innerText = totalOfficials;
+        }
+
+        // --- CRUD TIM LIST RENDERING ---
+        function renderTeamsList(filteredTeams = null) {
+            const container = document.getElementById('teamsContainer');
+            if (!container) return;
+
+            const displayTeams = filteredTeams || teams;
+            container.innerHTML = '';
+
+            if (displayTeams.length === 0) {
+                container.innerHTML = `
+                    <div class="col-span-full bg-[#121215] border border-[#27272f] p-8 text-center rounded-2xl">
+                        <i class="fa-solid fa-circle-exclamation text-neutral-500 text-2xl mb-2"></i>
+                        <p class="text-neutral-300 font-semibold text-xs">Tidak ada tim yang sesuai dengan pencarian.</p>
+                        <button onclick="renderTeamsList()" class="mt-2 text-red-400 hover:underline text-xs">Reset Pencarian</button>
+                    </div>
+                `;
+                return;
+            }
+
+            displayTeams.forEach(team => {
+                const playerCount = team.players ? team.players.length : 0;
+                const officialCount = team.officials ? team.officials.length : 0;
+                const headCoach = team.officials ? team.officials.find(o => o.role.toLowerCase().includes('coach') || o.role.toLowerCase().includes('pelatih')) : null;
+                const coachName = headCoach ? headCoach.name : (team.manager ? team.manager.name : 'Belum Ditentukan');
+
+                const isVerified = team.status === 'Terverifikasi';
+                const statusBadge = isVerified 
+                    ? `<span class="text-[10px] font-semibold px-2 py-0.5 rounded bg-neutral-800 text-emerald-400 border border-neutral-700">Terverifikasi</span>`
+                    : `<span class="text-[10px] font-semibold px-2 py-0.5 rounded bg-neutral-800 text-neutral-400 border border-neutral-700">Menunggu Berkas</span>`;
+
+                const card = document.createElement('div');
+                card.className = "bg-[#121215] border border-[#27272f] rounded-2xl p-5 flex flex-col justify-between hover:border-neutral-600 transition-colors";
+                card.innerHTML = `
+                    <div>
+                        <!-- Header -->
+                        <div class="flex items-start justify-between gap-3 mb-3.5">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-lg bg-neutral-900 border border-neutral-700 p-0.5 flex-shrink-0 flex items-center justify-center overflow-hidden">
+                                    <img src="${team.logo || '819882902_17972219118140687_15101562146224955_n.jpg'}" alt="${team.name}" class="w-full h-full object-cover rounded">
+                                </div>
+                                <div>
+                                    <h3 class="font-bold text-white text-sm font-heading leading-tight">${team.name}</h3>
+                                    <p class="text-[11px] text-neutral-400 mt-0.5"><i class="fa-solid fa-location-dot text-[10px] mr-1 text-red-500"></i>${team.origin}</p>
+                                </div>
+                            </div>
+                            ${statusBadge}
+                        </div>
+
+                        <!-- Info Pills -->
+                        <div class="grid grid-cols-2 gap-2 text-xs mb-3.5">
+                            <div class="p-2 bg-[#18181c] border border-[#27272f] rounded-lg">
+                                <span class="text-[10px] text-neutral-400 block">Kategori</span>
+                                <span class="font-semibold text-white truncate block">${team.category}</span>
+                            </div>
+                            <div class="p-2 bg-[#18181c] border border-[#27272f] rounded-lg">
+                                <span class="text-[10px] text-neutral-400 block">Pelatih</span>
+                                <span class="font-semibold text-white truncate block" title="${coachName}">${coachName}</span>
+                            </div>
+                        </div>
+
+                        <!-- Stats count -->
+                        <div class="flex items-center justify-between text-xs text-neutral-400 py-2 border-t border-b border-[#202026] mb-3.5">
+                            <span><strong class="text-white">${playerCount}</strong> Pemain Terdaftar</span>
+                            <span><strong class="text-white">${officialCount}</strong> Ofisial</span>
+                        </div>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="flex items-center gap-2 pt-1">
+                        <button onclick="openRosterModal('${team.id}')" class="flex-1 py-1.5 px-3 rounded-lg bg-[#18181c] hover:bg-[#222228] text-white font-semibold text-xs border border-[#27272f] transition-colors flex items-center justify-center gap-1.5">
+                            <i class="fa-solid fa-users text-[11px] text-neutral-400"></i>
+                            <span>Kelola Roster</span>
+                        </button>
+                        <button onclick="openEditTeamModal('${team.id}')" title="Edit Tim" class="p-1.5 rounded-lg bg-[#18181c] hover:bg-[#222228] text-neutral-300 border border-[#27272f] text-xs">
+                            <i class="fa-solid fa-pen-to-square"></i>
+                        </button>
+                        <button onclick="deleteTeam('${team.id}')" title="Hapus Tim" class="p-1.5 rounded-lg bg-[#18181c] hover:bg-neutral-800 text-neutral-400 hover:text-red-400 border border-[#27272f] text-xs">
+                            <i class="fa-solid fa-trash-can"></i>
+                        </button>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        function filterTeamsList() {
+            const query = document.getElementById('searchTeamInput').value.toLowerCase().trim();
+            if (!query) {
+                renderTeamsList();
+                return;
+            }
+            const filtered = teams.filter(t => 
+                t.name.toLowerCase().includes(query) || 
+                t.origin.toLowerCase().includes(query) || 
+                t.category.toLowerCase().includes(query)
+            );
+            renderTeamsList(filtered);
+        }
+
+        // --- TEAM MODAL HANDLERS ---
+        function openAddTeamModal() {
+            document.getElementById('teamForm').reset();
+            document.getElementById('teamFormId').value = '';
+            document.getElementById('teamModalTitle').innerText = 'Daftarkan Tim Baru';
+            document.getElementById('teamModal').classList.remove('hidden');
+        }
+
+        function openEditTeamModal(teamId) {
+            const team = teams.find(t => t.id === teamId);
+            if (!team) return;
+
+            document.getElementById('teamFormId').value = team.id;
+            document.getElementById('teamName').value = team.name;
+            document.getElementById('teamCategory').value = team.category;
+            document.getElementById('teamOrigin').value = team.origin;
+            document.getElementById('teamStatus').value = team.status;
+            document.getElementById('managerName').value = team.manager ? team.manager.name : '';
+            document.getElementById('managerPhone').value = team.manager ? team.manager.phone : '';
+            document.getElementById('teamModalTitle').innerText = 'Edit Identitas Tim';
+
+            document.getElementById('teamModal').classList.remove('hidden');
+        }
+
+        function closeTeamModal() {
+            document.getElementById('teamModal').classList.add('hidden');
+        }
+
+        function handleTeamSubmit(e) {
+            e.preventDefault();
+            const id = document.getElementById('teamFormId').value;
+            const name = document.getElementById('teamName').value.trim();
+            const category = document.getElementById('teamCategory').value;
+            const origin = document.getElementById('teamOrigin').value.trim();
+            const status = document.getElementById('teamStatus').value;
+            const managerName = document.getElementById('managerName').value.trim();
+            const managerPhone = document.getElementById('managerPhone').value.trim();
+            const logoInput = document.getElementById('teamLogoInput');
+
+            function finishSave(logoSrc) {
+                if (id) {
+                    const index = teams.findIndex(t => t.id === id);
+                    if (index !== -1) {
+                        teams[index].name = name;
+                        teams[index].category = category;
+                        teams[index].origin = origin;
+                        teams[index].status = status;
+                        if (logoSrc) teams[index].logo = logoSrc;
+                        teams[index].manager = {
+                            name: managerName,
+                            phone: managerPhone,
+                            email: teams[index].manager ? teams[index].manager.email : ''
+                        };
+                    }
+                } else {
+                    const newTeam = {
+                        id: 'team-' + Date.now(),
+                        name: name,
+                        category: category,
+                        origin: origin,
+                        status: status,
+                        logo: logoSrc || '819882902_17972219118140687_15101562146224955_n.jpg',
+                        manager: {
+                            name: managerName,
+                            phone: managerPhone,
+                            email: ''
+                        },
+                        officials: [
+                            { name: managerName, role: "Head Coach (Pelatih Kepala)", license: "Lisensi Nasional" }
+                        ],
+                        players: []
+                    };
+                    teams.push(newTeam);
+                }
+
+                saveTeamsToStorage();
+                renderTeamsList();
+                renderStandingsTable();
+                populateMatchSelect();
+                closeTeamModal();
+            }
+
+            if (logoInput.files && logoInput.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(evt) {
+                    finishSave(evt.target.result);
+                }
+                reader.readAsDataURL(logoInput.files[0]);
+            } else {
+                finishSave(null);
+            }
+        }
+
+        function deleteTeam(teamId) {
+            const team = teams.find(t => t.id === teamId);
+            if (!team) return;
+            if (confirm(`Hapus tim "${team.name}" dari turnamen?`)) {
+                teams = teams.filter(t => t.id !== teamId);
+                matches = matches.filter(m => m.team1Id !== teamId && m.team2Id !== teamId);
+                saveTeamsToStorage();
+                saveMatchesToStorage();
+                renderTeamsList();
+                renderStandingsTable();
+                renderMatchesList();
+                populateMatchSelect();
+            }
+        }
+
+        // --- ROSTER & PLAYERS MANAGEMENT (MODAL 2) ---
+        function openRosterModal(teamId) {
+            activeRosterTeamId = teamId;
+            const team = teams.find(t => t.id === teamId);
+            if (!team) return;
+
+            document.getElementById('rosterTeamName').innerText = team.name;
+            document.getElementById('rosterTeamInfo').innerText = `${team.category} • ${team.origin}`;
+            document.getElementById('rosterTeamLogo').src = team.logo || '819882902_17972219118140687_15101562146224955_n.jpg';
+            document.getElementById('rosterTeamBadge').innerText = team.status;
+
+            document.getElementById('addPlayerFormBox').classList.add('hidden');
+            document.getElementById('addOfficialFormBox').classList.add('hidden');
+
+            renderRosterModalContent(team);
+            document.getElementById('rosterModal').classList.remove('hidden');
+        }
+
+        function closeRosterModal() {
+            activeRosterTeamId = null;
+            document.getElementById('rosterModal').classList.add('hidden');
+        }
+
+        function renderRosterModalContent(team) {
+            // Officials
+            const offContainer = document.getElementById('rosterOfficialsList');
+            offContainer.innerHTML = '';
+            if (!team.officials || team.officials.length === 0) {
+                offContainer.innerHTML = `<p class="text-neutral-500 italic col-span-full">Belum ada data ofisial/pelatih.</p>`;
+            } else {
+                team.officials.forEach((off, idx) => {
+                    const offDiv = document.createElement('div');
+                    offDiv.className = "p-2.5 bg-[#18181c] border border-[#27272f] rounded-lg flex items-center justify-between";
+                    offDiv.innerHTML = `
+                        <div class="flex items-center gap-2">
+                            <div class="w-6 h-6 rounded bg-neutral-800 text-neutral-300 flex items-center justify-center text-[10px]">
+                                <i class="fa-solid fa-user-tie"></i>
+                            </div>
+                            <div>
+                                <h5 class="font-bold text-white text-xs leading-none">${off.name}</h5>
+                                <p class="text-[10px] text-neutral-400 mt-0.5">${off.role} ${off.license ? '• ' + off.license : ''}</p>
+                            </div>
+                        </div>
+                        <button onclick="deleteOfficialFromTeam(${idx})" class="text-neutral-400 hover:text-red-400 p-1" title="Hapus">
+                            <i class="fa-solid fa-xmark text-xs"></i>
+                        </button>
+                    `;
+                    offContainer.appendChild(offDiv);
+                });
+            }
+
+            // Players
+            const plyContainer = document.getElementById('rosterPlayersList');
+            plyContainer.innerHTML = '';
+            if (!team.players || team.players.length === 0) {
+                plyContainer.innerHTML = `<p class="text-neutral-500 italic col-span-full py-3 text-center">Belum ada pemain dalam roster ini.</p>`;
+            } else {
+                team.players.forEach((ply) => {
+                    const plyDiv = document.createElement('div');
+                    plyDiv.className = "p-2.5 bg-[#18181c] border border-[#27272f] rounded-lg relative group";
+                    plyDiv.innerHTML = `
+                        <div class="flex items-start justify-between">
+                            <div class="flex items-center gap-2">
+                                <span class="w-7 h-7 rounded bg-neutral-900 border border-neutral-700 text-white font-mono font-bold flex items-center justify-center text-xs">
+                                    #${ply.number}
+                                </span>
+                                <div>
+                                    <h5 class="font-bold text-white text-xs leading-none">${ply.name}</h5>
+                                    <span class="text-[10px] text-neutral-400 mt-0.5 block">${ply.position}</span>
+                                </div>
+                            </div>
+                            <button onclick="deletePlayerFromTeam(${ply.id})" class="text-neutral-500 hover:text-red-400 p-0.5 text-xs" title="Hapus">
+                                <i class="fa-solid fa-trash-can text-[10px]"></i>
+                            </button>
+                        </div>
+                        <div class="mt-2 pt-1.5 border-t border-[#222228] flex items-center justify-between text-[10px] text-neutral-400">
+                            <span>${ply.age} Tahun</span>
+                            <span class="font-mono text-neutral-500">${ply.idCard || 'NISN OK'}</span>
+                        </div>
+                    `;
+                    plyContainer.appendChild(plyDiv);
+                });
+            }
+        }
+
+        function toggleAddOfficialForm() {
+            document.getElementById('addOfficialFormBox').classList.toggle('hidden');
+        }
+
+        function saveOfficialToCurrentTeam() {
+            if (!activeRosterTeamId) return;
+            const team = teams.find(t => t.id === activeRosterTeamId);
+            if (!team) return;
+
+            const name = document.getElementById('newOfficialName').value.trim();
+            const role = document.getElementById('newOfficialRole').value;
+            const license = document.getElementById('newOfficialLicense').value.trim();
+
+            if (!name) {
+                alert('Nama ofisial tidak boleh kosong!');
+                return;
+            }
+
+            if (!team.officials) team.officials = [];
+            team.officials.push({ name, role, license });
+
+            saveTeamsToStorage();
+            renderRosterModalContent(team);
+            renderTeamsList();
+            document.getElementById('newOfficialName').value = '';
+            document.getElementById('newOfficialLicense').value = '';
+            document.getElementById('addOfficialFormBox').classList.add('hidden');
+        }
+
+        function deleteOfficialFromTeam(index) {
+            if (!activeRosterTeamId) return;
+            const team = teams.find(t => t.id === activeRosterTeamId);
+            if (!team || !team.officials) return;
+
+            team.officials.splice(index, 1);
+            saveTeamsToStorage();
+            renderRosterModalContent(team);
+            renderTeamsList();
+        }
+
+        function toggleAddPlayerForm() {
+            document.getElementById('addPlayerFormBox').classList.toggle('hidden');
+        }
+
+        function savePlayerToCurrentTeam() {
+            if (!activeRosterTeamId) return;
+            const team = teams.find(t => t.id === activeRosterTeamId);
+            if (!team) return;
+
+            const name = document.getElementById('newPlayerName').value.trim();
+            const number = parseInt(document.getElementById('newPlayerNumber').value);
+            const position = document.getElementById('newPlayerPosition').value;
+            const age = parseInt(document.getElementById('newPlayerAge').value) || 10;
+            const idCard = document.getElementById('newPlayerIdCard').value.trim() || 'NISN OK';
+
+            if (!name) {
+                alert('Nama pemain harus diisi!');
+                return;
+            }
+            if (isNaN(number) || number < 1 || number > 99) {
+                alert('Nomor punggung harus 1 - 99!');
+                return;
+            }
+
+            if (!team.players) team.players = [];
+            team.players.push({
+                id: Date.now(),
+                name,
+                number,
+                position,
+                age,
+                idCard
+            });
+
+            saveTeamsToStorage();
+            renderRosterModalContent(team);
+            renderTeamsList();
+
+            document.getElementById('newPlayerName').value = '';
+            document.getElementById('newPlayerNumber').value = '';
+            document.getElementById('newPlayerAge').value = '';
+            document.getElementById('newPlayerIdCard').value = '';
+            document.getElementById('addPlayerFormBox').classList.add('hidden');
+        }
+
+        function deletePlayerFromTeam(playerId) {
+            if (!activeRosterTeamId) return;
+            const team = teams.find(t => t.id === activeRosterTeamId);
+            if (!team || !team.players) return;
+
+            team.players = team.players.filter(p => p.id !== playerId);
+            saveTeamsToStorage();
+            renderRosterModalContent(team);
+            renderTeamsList();
+        }
+
+        // --- KLASEMEN & SCORE ENGINE ---
+        function calculateStandings() {
+            const stats = {};
+            teams.forEach(t => {
+                stats[t.id] = {
+                    team: t,
+                    played: 0,
+                    won: 0,
+                    draw: 0,
+                    lost: 0,
+                    gf: 0,
+                    ga: 0,
+                    gd: 0,
+                    points: 0
+                };
+            });
+
+            matches.forEach(m => {
+                if (m.status.includes('Selesai') || m.status.includes('FT')) {
+                    const t1 = stats[m.team1Id];
+                    const t2 = stats[m.team2Id];
+                    if (t1 && t2) {
+                        t1.played += 1;
+                        t2.played += 1;
+                        t1.gf += m.team1Score;
+                        t1.ga += m.team2Score;
+                        t2.gf += m.team2Score;
+                        t2.ga += m.team1Score;
+
+                        if (m.team1Score > m.team2Score) {
+                            t1.won += 1;
+                            t1.points += 3;
+                            t2.lost += 1;
+                        } else if (m.team1Score < m.team2Score) {
+                            t2.won += 1;
+                            t2.points += 3;
+                            t1.lost += 1;
+                        } else {
+                            t1.draw += 1;
+                            t2.draw += 1;
+                            t1.points += 1;
+                            t2.points += 1;
+                        }
+                    }
+                }
+            });
+
+            Object.values(stats).forEach(s => {
+                s.gd = s.gf - s.ga;
+            });
+
+            return Object.values(stats).sort((a, b) => {
+                if (b.points !== a.points) return b.points - a.points;
+                if (b.gd !== a.gd) return b.gd - a.gd;
+                if (b.gf !== a.gf) return b.gf - a.gf;
+                return a.team.name.localeCompare(b.team.name);
+            });
+        }
+
+        function renderStandingsTable() {
+            const tableBody = document.getElementById('standingsTableBody');
+            if (!tableBody) return;
+
+            const standings = calculateStandings();
+            tableBody.innerHTML = '';
+
+            standings.forEach((row, index) => {
+                const rank = index + 1;
+                let rankBadge = `<span class="text-neutral-400 font-mono text-xs">${rank}</span>`;
+                if (rank === 1) rankBadge = `<span class="w-5 h-5 rounded bg-emerald-950/80 text-emerald-400 border border-emerald-800 text-[11px] inline-flex items-center justify-center font-bold">1</span>`;
+                if (rank === 2) rankBadge = `<span class="w-5 h-5 rounded bg-emerald-950/80 text-emerald-400 border border-emerald-800 text-[11px] inline-flex items-center justify-center font-bold">2</span>`;
+
+                const tr = document.createElement('tr');
+                tr.className = "table-row-hover transition-colors";
+                tr.innerHTML = `
+                    <td class="py-2.5 px-3 text-center">${rankBadge}</td>
+                    <td class="py-2.5 px-3">
+                        <div class="flex items-center gap-2">
+                            <div class="w-6 h-6 rounded bg-neutral-900 border border-neutral-700 overflow-hidden flex-shrink-0 flex items-center justify-center">
+                                <img src="${row.team.logo || '819882902_17972219118140687_15101562146224955_n.jpg'}" alt="${row.team.name}" class="w-full h-full object-cover">
+                            </div>
+                            <span class="font-bold text-white text-xs">${row.team.name}</span>
+                        </div>
+                    </td>
+                    <td class="py-2.5 px-2 text-center">${row.played}</td>
+                    <td class="py-2.5 px-2 text-center text-neutral-200">${row.won}</td>
+                    <td class="py-2.5 px-2 text-center text-neutral-400">${row.draw}</td>
+                    <td class="py-2.5 px-2 text-center text-neutral-400">${row.lost}</td>
+                    <td class="py-2.5 px-2 text-center hidden sm:table-cell text-neutral-400">${row.gf}</td>
+                    <td class="py-2.5 px-2 text-center hidden sm:table-cell text-neutral-400">${row.ga}</td>
+                    <td class="py-2.5 px-2 text-center font-mono ${row.gd > 0 ? 'text-emerald-400' : (row.gd < 0 ? 'text-red-400' : 'text-neutral-400')}">${row.gd > 0 ? '+' + row.gd : row.gd}</td>
+                    <td class="py-2.5 px-3 text-center font-bold text-white bg-neutral-900/60 font-mono">${row.points}</td>
+                `;
+                tableBody.appendChild(tr);
+            });
+        }
+
+        // --- MATCHES LIST RENDERING ---
+        function renderMatchesList() {
+            const container = document.getElementById('matchesContainer');
+            if (!container) return;
+
+            container.innerHTML = '';
+            matches.forEach(m => {
+                const t1 = teams.find(t => t.id === m.team1Id) || { name: 'Tim A', logo: '819882902_17972219118140687_15101562146224955_n.jpg' };
+                const t2 = teams.find(t => t.id === m.team2Id) || { name: 'Tim B', logo: '819882902_17972219118140687_15101562146224955_n.jpg' };
+
+                const isDone = m.status.includes('Selesai') || m.status.includes('FT');
+
+                const card = document.createElement('div');
+                card.className = "p-2.5 bg-[#18181c] border border-[#27272f] rounded-xl text-xs";
+                card.innerHTML = `
+                    <div class="flex items-center justify-between text-[10px] text-neutral-400 mb-1.5 pb-1 border-b border-[#222228]">
+                        <span>${m.dateText}</span>
+                        <span class="font-medium ${isDone ? 'text-neutral-300' : 'text-amber-400'}">${m.status}</span>
+                    </div>
+                    <div class="flex items-center justify-between gap-2">
+                        <div class="flex items-center gap-1.5 flex-1 min-w-0">
+                            <img src="${t1.logo}" class="w-5 h-5 rounded object-cover flex-shrink-0 border border-neutral-700">
+                            <span class="font-semibold text-white truncate">${t1.name}</span>
+                        </div>
+                        <div class="px-2 py-0.5 bg-neutral-900 rounded border border-neutral-700 font-mono font-bold text-white text-xs">
+                            ${isDone ? `${m.team1Score} - ${m.team2Score}` : 'vs'}
+                        </div>
+                        <div class="flex items-center justify-end gap-1.5 flex-1 min-w-0 text-right">
+                            <span class="font-semibold text-white truncate">${t2.name}</span>
+                            <img src="${t2.logo}" class="w-5 h-5 rounded object-cover flex-shrink-0 border border-neutral-700">
+                        </div>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        function populateMatchSelect() {
+            const select = document.getElementById('matchSelect');
+            if (!select) return;
+
+            select.innerHTML = '';
+            matches.forEach(m => {
+                const t1 = teams.find(t => t.id === m.team1Id) || { name: 'Tim 1' };
+                const t2 = teams.find(t => t.id === m.team2Id) || { name: 'Tim 2' };
+                const opt = document.createElement('option');
+                opt.value = m.id;
+                opt.innerText = `${t1.name} vs ${t2.name} (${m.status})`;
+                select.appendChild(opt);
+            });
+
+            updateMatchFormLabels();
+        }
+
+        function updateMatchFormLabels() {
+            const select = document.getElementById('matchSelect');
+            if (!select || !select.value) return;
+
+            const match = matches.find(m => m.id === select.value);
+            if (match) {
+                const t1 = teams.find(t => t.id === match.team1Id) || { name: 'Tim 1' };
+                const t2 = teams.find(t => t.id === match.team2Id) || { name: 'Tim 2' };
+                document.getElementById('team1Label').innerText = `Skor ${t1.name}`;
+                document.getElementById('team2Label').innerText = `Skor ${t2.name}`;
+                document.getElementById('team1Score').value = match.team1Score;
+                document.getElementById('team2Score').value = match.team2Score;
+                document.getElementById('matchStatusSelect').value = match.status;
+            }
+        }
+
+        const matchSelectEl = document.getElementById('matchSelect');
+        if (matchSelectEl) {
+            matchSelectEl.addEventListener('change', updateMatchFormLabels);
+        }
+
+        function openMatchScoreModal() {
+            populateMatchSelect();
+            document.getElementById('matchModal').classList.remove('hidden');
+        }
+
+        function closeMatchScoreModal() {
+            document.getElementById('matchModal').classList.add('hidden');
+        }
+
+        function handleMatchSubmit(e) {
+            e.preventDefault();
+            const matchId = document.getElementById('matchSelect').value;
+            const score1 = parseInt(document.getElementById('team1Score').value) || 0;
+            const score2 = parseInt(document.getElementById('team2Score').value) || 0;
+            const status = document.getElementById('matchStatusSelect').value;
+
+            const match = matches.find(m => m.id === matchId);
+            if (match) {
+                match.team1Score = score1;
+                match.team2Score = score2;
+                match.status = status;
+
+                saveMatchesToStorage();
+                renderMatchesList();
+                renderStandingsTable();
+                closeMatchScoreModal();
+            }
+        }
+
+        // --- DOKUMENTASI GALLERY ENGINE ---
+        function renderGallery(filter = 'semua') {
+            const container = document.getElementById('galleryContainer');
+            if (!container) return;
+
+            container.innerHTML = '';
+            const items = filter === 'semua' ? gallery : gallery.filter(g => g.category === filter);
+
+            if (items.length === 0) {
+                container.innerHTML = `<p class="col-span-full text-center text-neutral-500 py-6 text-xs">Belum ada foto dalam kategori ini.</p>`;
+                return;
+            }
+
+            items.forEach(item => {
+                const card = document.createElement('div');
+                card.className = "bg-[#121215] border border-[#27272f] rounded-xl p-2 cursor-pointer hover:border-neutral-600 transition-colors";
+                card.onclick = () => openLightbox(item.image, item.title, item.desc);
+                card.innerHTML = `
+                    <div class="relative aspect-video rounded-lg overflow-hidden bg-neutral-900">
+                        <img src="${item.image}" alt="${item.title}" class="w-full h-full object-cover">
+                        <span class="absolute bottom-1.5 left-1.5 text-[9px] bg-black/80 text-white font-medium px-1.5 py-0.5 rounded uppercase">${item.category}</span>
+                    </div>
+                    <div class="p-2">
+                        <h4 class="font-bold text-white text-xs truncate">${item.title}</h4>
+                        <p class="text-[11px] text-neutral-400 line-clamp-1 mt-0.5">${item.desc}</p>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        function filterGallery(category) {
+            document.querySelectorAll('.gallery-filter-btn').forEach(btn => {
+                if (btn.getAttribute('data-tag') === category) {
+                    btn.className = "gallery-filter-btn px-3 py-1.5 rounded-lg bg-neutral-800 text-white text-xs font-semibold";
+                } else {
+                    btn.className = "gallery-filter-btn px-3 py-1.5 rounded-lg bg-[#121215] text-neutral-400 hover:text-white border border-[#27272f] text-xs font-semibold";
+                }
+            });
+            renderGallery(category);
+        }
+
+        function openUploadPhotoModal() {
+            document.getElementById('uploadPhotoForm').reset();
+            document.getElementById('uploadPhotoModal').classList.remove('hidden');
+        }
+
+        function closeUploadPhotoModal() {
+            document.getElementById('uploadPhotoModal').classList.add('hidden');
+        }
+
+        function handlePhotoUpload(e) {
+            e.preventDefault();
+            const title = document.getElementById('photoTitle').value.trim();
+            const category = document.getElementById('photoCategory').value;
+            const fileInput = document.getElementById('photoFileInput');
+
+            if (fileInput.files && fileInput.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(evt) {
+                    const newPhoto = {
+                        id: Date.now(),
+                        title: title,
+                        category: category,
+                        image: evt.target.result,
+                        desc: `Dokumentasi pertandingan SFL Season 2.`
+                    };
+                    gallery.unshift(newPhoto);
+                    saveGalleryToStorage();
+                    renderGallery('semua');
+                    closeUploadPhotoModal();
+                }
+                reader.readAsDataURL(fileInput.files[0]);
+            }
+        }
+
+        function openLightbox(imgSrc, title, desc) {
+            document.getElementById('lightboxImage').src = imgSrc;
+            document.getElementById('lightboxTitle').innerText = title;
+            document.getElementById('lightboxDesc').innerText = desc;
+            document.getElementById('lightboxModal').classList.remove('hidden');
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightboxModal').classList.add('hidden');
+        }
+
+        function toggleMobileMenu() {
+            document.getElementById('mobileMenu').classList.toggle('hidden');
+        }
+
+        // --- APP BOOTSTRAP ---
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+
+        renderTeamsList();
+        updateOverallStats();
+        renderStandingsTable();
+        renderMatchesList();
+        renderGallery('semua');
+        populateMatchSelect();
+    </script>
+
+</body>
+
+</html>
